@@ -42,7 +42,7 @@
    roslaunch mpc_ctrl run_ctrl.launch
 3. 启动轨迹生成器
    ```bash
-   roslaunch mpc_ctrl pub_cmd.launch # traj_mode: 0 # 0: fixed position control; 1: circle control
+   roslaunch mpc_ctrl pub_cmd.launch
 3. mpc控制效果可视化脚本
    ```bash
    python3 ~/catkin_ws/src/your_pkg/mpc_ctrl/scripts/controller_vis.py  # 轨迹跟踪结果分析可视化
