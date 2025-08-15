@@ -58,7 +58,7 @@
    traj_mode: 0 # 0: fixed position control; 1: circle control
    attitude_target_topic: /mavros/setpoint_raw/attitude
    position_target_topic: /mavros/setpoint_raw/local
-   save_path: ~/experiment/mpc_ctrl_ws/src/mpc_ctrl/scripts/mpc_tracking_data.csv
+   save_path: ~/experiment/mpc_ctrl_ws/src/mpc_ctrl/scripts/mpc_tracking_data.csv # please sure path in your_pkg/scripts
 2. ctrl_param_fpv.yaml主要负责控制器参数
    ```bash
    mass: 1.8065 # kg
