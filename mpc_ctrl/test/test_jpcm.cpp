@@ -38,9 +38,9 @@ int main(int argc, char *argv[])
 
     Controller controller(param);
     Controller_Output_t ctrl_cmd;
-    CTRL_MODE MPC = CTRL_MODE::JPCM;
+    CTRL_MODE MPC = CTRL_MODE::MPC;
 
-    for (int i = 0; i < param.factor_graph.OPT_LENS_TRAJ + 2; i++)
+    for (int i = 0; i < param.factor_graph.OPT_LENS_TRAJ + 10; i++)
     {
       des.p = Eigen::Vector3d(0, 0, v * (i + 1) * dt);
       des.v = Eigen::Vector3d(0, 0, v);

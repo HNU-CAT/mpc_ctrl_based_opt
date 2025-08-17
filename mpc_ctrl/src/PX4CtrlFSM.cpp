@@ -143,8 +143,6 @@ void PX4CtrlFSM::process()
 	cmd_data.recv_new_msg = false; // reset command data
 	// STEP5: Detect if the drone has landed
 	land_detector(state, des, odom_data);
-	// cout << takeoff_land.landed << " ";
-	// fflush(stdout);
 }
 
 void PX4CtrlFSM::motors_idling(const Imu_Data_t &imu, Controller_Output_t &thr_bodyrate_u)

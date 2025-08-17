@@ -1,10 +1,10 @@
-real_world_flag: False # Set to true if you are running on a real-world drone, false for simulation.
-# odom_topic: /Odometry
-odom_topic: /mavros/local_position/odom
+real_world_flag: True # Set to true if you are running on a real-world drone, false for simulation.
+# odom_topic: /Odom_high_freq /mavros/local_position/odom /vision_odom
+odom_topic: /Odom_high_freq
 
-# imu_topic: /lidar/imu  // lidar imu
+# imu_topic: /lidar/imu  /mavros/imu/data
 imu_topic: /mavros/imu/data
-# imu_topic: /iris_0/mavros/imu/data
+
 target_topic: /planning/pos_cmd
 
 traj_mode: 0 # 0: fixed position control; 1: circle control
@@ -16,13 +16,13 @@ position_target_topic: /mavros/setpoint_raw/local
 save_path: ~/experiment/mpc_ctrl_ws/src/mpc_ctrl/scripts/mpc_tracking_data.csv
 
 # For Circle
-circle_radius: 4.0
+circle_radius: 3.0
 time_to_max_radius: 30
 yaw_control: True
-velocity: 4.0
+velocity: 0.8
 takeoff_height: 1.0
 max_path_length: 600
-z_amplitude: 0.2
+z_amplitude: 0.1
 z_frequency: 0.2
 # log
 

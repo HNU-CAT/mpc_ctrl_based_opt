@@ -405,11 +405,11 @@ quadrotor_msgs::Px4ctrlDebug Controller::calculateControl(const Desired_State_t 
 
   if (timeout || mode_switch == DFBC || des_data_v_.size() < opt_traj_lens_)
   {
-    // Controller::calculateControl(des_data_v_[0], odom_noise, imu, thr_bodyrate_u);
-    // thrust = thr_bodyrate_u.thrust;
-    // bodyrates = thr_bodyrate_u.bodyrates;
-    thr_bodyrate_u.thrust = 0;
-    thr_bodyrate_u.bodyrates = bodyrates;
+    Controller::calculateControl(des_data_v_[0], odom_noise, imu, thr_bodyrate_u);
+    thrust = thr_bodyrate_u.thrust;
+    bodyrates = thr_bodyrate_u.bodyrates;
+    // thr_bodyrate_u.thrust = 0;
+    // thr_bodyrate_u.bodyrates = bodyrates;
   }
   else if (mode_switch == MPC && des_data_v_.size() == opt_traj_lens_)
   {
@@ -430,7 +430,7 @@ quadrotor_msgs::Px4ctrlDebug Controller::calculateControl(const Desired_State_t 
 
     start = clock();
     Values result = optimizer.optimize();
-    initial_value_ = result; // 更新初始值为优化后的结果
+    // initial_value_ = result; // 更新初始值为优化后的结果
     end = clock();
     opt_cost = (double)(end - start) / CLOCKS_PER_SEC;
     float distance = (des_data_v_[0].p - odom_noise.p).norm();
@@ -597,6 +597,12 @@ quadrotor_msgs::Px4ctrlDebug Controller::calculateControl(const Desired_State_t 
 
   debug_msg_.des_thr = thr_bodyrate_u.thrust;
 
+  log_ << std::fixed << std::setprecision(4)
+       << odom.rcv_stamp.toSec() << " "
+       << 0.0 << " " << 0.0 << " " << 0.0 << " " << 0.0 << " "
+       << 0.0 << " " << 0.0 << " "
+       << thr_bodyrate_u.thrust << " "
+       << std::endl;
   // Used for thrust-accel mapping estimation
   timed_thrust_.push(std::pair<ros::Time, double>(ros::Time::now(), thr_bodyrate_u.thrust));
   while (timed_thrust_.size() > 100)

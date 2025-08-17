@@ -1,0 +1,41 @@
+<launch>
+
+    <arg name="rigid_name" default="hnu2" />
+    <arg name="vprn_ip" default="192.168.31.3" />
+
+    <include file="$(find vrpn_client_ros)/launch/sample.launch">
+        <arg name="server" value="$(arg vprn_ip)"/>
+    </include>
+
+    <node name="vicon2odom_node" pkg="vicon2odom" type="vicon2odom_node" output="screen">
+        <!-- 动捕话题配置 -->
+        <param name="pose_topic" value="/vrpn_client_node/$(arg rigid_name)/pose" />
+        <param name="twist_topic" value="/vrpn_client_node/$(arg rigid_name)/twist" />
+        
+        <!-- 输出话题配置 -->
+        <param name="odom_topic" value="/vision_odom" />
+        <param name="px4_pose_topic" value="/mavros/vision_pose/pose" />
+        
+        <!-- 坐标系配置 -->
+        <param name="frame_id" value="map" />
+        <param name="child_frame_id" value="base_link" />
+        
+        <!-- IMU插值核心配置 -->
+        <param name="use_imu_interpolation" value="false" />  <!-- 启用IMU插值功能 -->
+        <param name="imu_topic" value="/mavros/imu/data" />  <!-- 飞控IMU数据话题 -->
+        <param name="use_imu_filter" value="true" />  <!-- 启用IMU数据低通滤波 -->
+        <param name="gravity" value="9.81" />  <!-- 重力加速度值（根据实际地理位置微调） -->
+        
+        <!-- IMU零偏（Ba/Bg）配置 -->
+        <param name="auto_calib_bias" value="true" />  <!-- 启动时自动校准零偏（需IMU静止） -->
+        
+        <!-- 手动零偏参数（仅当auto_calib_bias=false时生效） -->
+        <param name="init_Ba_x" value="0.05" />  <!-- 加速度计X轴零偏（单位：m/s²） -->
+        <param name="init_Ba_y" value="-0.03" /> <!-- 加速度计Y轴零偏 -->
+        <param name="init_Ba_z" value="0.12" />  <!-- 加速度计Z轴零偏 -->
+        <param name="init_Bg_x" value="0.002" /> <!-- 陀螺仪X轴零偏（单位：rad/s） -->
+        <param name="init_Bg_y" value="-0.001" /><!-- 陀螺仪Y轴零偏 -->
+        <param name="init_Bg_z" value="0.003" /> <!-- 陀螺仪Z轴零偏 -->
+    </node>
+
+</launch>

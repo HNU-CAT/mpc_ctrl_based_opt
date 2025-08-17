@@ -15,7 +15,7 @@
 		
         <remap from="~odom" to="/vicon/odom" />
 		<remap from="~cmd" to="/position_cmd" />
-        <rosparam command="load" file="$(find mpc_ctrl)/config/ctrl_param_fpv.yaml" />
+        <rosparam command="load" file="$(find mpc_ctrl)/config/ctrl_param_sim.yaml" />
 	</node>
  
 </launch>
