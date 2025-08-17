@@ -24,7 +24,7 @@
 1. 将仓库克隆到ROS工作空间的`src`目录
    ```bash
    cd ~/catkin_ws/src
-   git clone <仓库地址>
+   git clone https://github.com/HNU-CAT/mpc_ctrl_based_opt.git
    
 ## 编译工作空间
 1. 将仓库克隆到ROS工作空间的`src`目录
